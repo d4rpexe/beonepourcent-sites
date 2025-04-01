@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accès Sécurisé</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://cdn.discordapp.com/attachments/1349512107883892819/1356404564265271327/r1SLrLr.png?ex=67ec71b0&is=67eb2030&hm=fd608657ded361986333c33bf9c9db025daf37ce3bfe68f4fe830ea671266bcf&') no-repeat center center/cover;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .access-screen, .main-screen {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        .main-screen {
+            display: none;
+            width: 80%;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .menu {
+            margin: 20px;
+            padding: 20px;
+            background-color: transparent;
+            border-radius: 10px;
+            margin-top: -100px;
+        }
+        .menu h2 {
+            color: black; 
+            margin-bottom: 10px;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .menu button {
+            font-size: 18px;
+            padding: 15px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+        }
+        .menu button:hover {
+            opacity: 0.8;
+        }
+        input {
+            font-size: 20px;
+            padding: 10px;
+            margin: 10px;
+            width: 250px;
+            text-align: center;
+        }
+        button {
+            font-size: 22px;
+            padding: 12px 24px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        h1 {
+            color: black;
+        }
+
+        /* Style des boutons */
+        .discord {
+            background-color: #7289da;
+            color: white;
+        }
+        .youtube {
+            background-color: #ff0000;
+            color: white;
+        }
+        .tiktok {
+            background-color: #000000;
+            color: white;
+        }
+        .twitter {
+            background-color: #ffffff;
+            color: black;
+        }
+
+        /* Style des boutons dox floute et tool */
+        .dox-floute {
+            background-color: #000000;
+            color: white;
+        }
+        .tool {
+            background-color: #2f4f4f;
+            color: white;
+        }
+
+        /* Menu Multi Tâche descendu */
+        .menu-multi-tache {
+            margin-top: 80px;
+        }
+
+        /* Contenu du dox floute */
+        .dox-content {
+            display: flex;
+            justify-content: space-between;
+        }
+        .dox-content .left, .dox-content .right {
+            width: 48%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="access-screen">
+        <h1>Connexion</h1>
+        <input type="text" id="username" placeholder="Pseudo">
+        <input type="password" id="access-code" placeholder="Mot de passe">
+        <button onclick="checkAccess()">Entrer</button>
+    </div>
+    <div class="main-screen">
+        <div class="menu">
+            <h2>Réseaux Sociaux</h2>
+            <div class="button-container">
+                <button class="discord" onclick="window.location.href='https://discord.gg/beonepourcent'">Discord</button>
+                <button class="youtube" onclick="window.location.href='https://www.youtube.com/@BeOnePourcent'">YouTube</button>
+                <button class="tiktok" onclick="window.location.href='https://www.tiktok.com/@beonepourcent_off'">TikTok</button>
+                <button class="twitter" onclick="window.location.href='https://twitter.com/Beonepourcent'">Twitter</button>
+            </div>
+        </div>
+
+        <!-- Menu Multi Tâche avec Dox Floute et Tool -->
+        <div class="menu menu-multi-tache">
+            <h2>Multi Tâche</h2>
+            <div class="button-container">
+                <!-- Dox Floute -->
+                <button class="dox-floute" onclick="showDoxFloute()">Dox Floute</button>
+                <!-- Tool -->
+                <button class="tool" onclick="showTool()">Tool</button>
+            </div>
+        </div>
+
+        <!-- Dox Floute Content -->
+        <div class="dox-content" id="dox-floute-content" style="display: none;">
+            <div class="left">
+                <h3>Certificat</h3>
+                <object data="file:///C:/Users/benec/Desktop/ez%20by%20me/floute/certificat%20lyc%C3%A9/Note_A001.pdf" width="100%" height="400px"></object>
+            </div>
+            <div class="right">
+                <h3>Informations personnelles</h3>
+                <p>Nom Prénom : Guibourt Florian</p>
+                <p>Maman : Caroline Guibourt</p>
+                <p>Numéro : +33661812660</p>
+                <p>Email Maman : caroline.guibourt@sfr.fr</p>
+                <p>Papa : hubert.guibourt@gmail.com</p>
+                <p>IP : 37.65.43.177</p>
+            </div>
+        </div>
+
+        <!-- Tool Content -->
+        <div id="tool-content" style="display: none;">
+            <h3>Accéder à Tool</h3>
+            <p>Veuillez entrer le mot de passe pour accéder au contenu.</p>
+            <input type="password" id="tool-password" placeholder="Mot de passe Tool">
+            <button onclick="checkToolPassword()">Accéder</button>
+        </div>
+    </div>
+
+    <script>
+        function checkAccess() {
+            const username = document.getElementById('username').value;
+            const code = document.getElementById('access-code').value;
+            if (code === "12345" && username === "D4RP") {
+                document.querySelector('.access-screen').style.display = 'none';
+                document.querySelector('.main-screen').style.display = 'flex';
+            } else {
+                alert("Pseudo ou mot de passe incorrect");
+            }
+        }
+
+        function showDoxFloute() {
+            const password = prompt("Veuillez entrer le mot de passe pour Dox Floute:");
+            if (password === "dox123") {
+                document.getElementById("dox-floute-content").style.display = 'flex';
+            } else {
+                alert("Mot de passe incorrect");
+            }
+        }
+
+        function showTool() {
+            const password = prompt("Veuillez entrer le mot de passe pour Tool:");
+            if (password === "tool123") {
+                window.location.href = "https://gofile.io/d/9BL0IZ";
+            } else {
+                alert("Mot de passe incorrect");
+            }
+        }
+
+        function checkToolPassword() {
+            const password = document.getElementById('tool-password').value;
+            if (password === "tool123") {
+                window.location.href = "https://gofile.io/d/9BL0IZ";
+            } else {
+                alert("Mot de passe incorrect");
+            }
+        }
+    </script>
+</body>
+</html>
